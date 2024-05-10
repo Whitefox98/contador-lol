@@ -116,8 +116,69 @@ const badThings : Item[]= [
     value: -10
   },
 ]
+const badThings2 : Item[]= [
+  {
+    name: 'Trade favorable enemigo',
+    value: -6
+  },
+  {
+    name: 'Trade muy favorable enemigo',
+    value: -10
+  },
+  {
+    name: 'Kill enemiga',
+    value: -2
+  },
+  {
+    name: 'Kill bounty enemiga',
+    value: -4
+  },
+  {
+    name: 'Torre enemiga',
+    value: -6
+  },
+  {
+    name: 'Torre con bounty enemiga',
+    value: -10
+  },
+  {
+    name: 'Drake enemigo',
+    value: -6
+  },
+  {
+    name: 'Alma drake enemigo',
+    value: -10
+  },
+  {
+    name: 'Nash enemigo',
+    value: -10
+  },
+  {
+    name: 'Nexo enemigo',
+    value: -20
+  },
+]
+const badThings3 : Item[]= [
+  {
+    name: 'Fallo pequeño',
+    value: -3
+  },
+  {
+    name: 'Fallo mediano',
+    value: -5
+  },
+  {
+    name: 'Fallo grande',
+    value: -10
+  },
+  {
+    name: 'Fallo enorme',
+    value: -25
+  },
+]
 function App() {
   const [values, setValues] = useState<Item[]>([])
+  const [level, setLevel] = useState(0)
   const addValue = useCallback((value: Item) => {
     setValues((old) => [...old, value])
   }, [])
@@ -128,10 +189,20 @@ function App() {
       return copy
     })
   }, [])
+  const lvls: any = {
+    0: badThings,
+    1: badThings2,
+    2: badThings3
+  }
   return (
     <div className="App">
+      <div style={{marginBottom: '10px'}}>
+          <button onClick={() => setLevel(0)}>Nivel 1</button>
+          <button onClick={() => setLevel(1)}>Nivel 2</button>
+          <button onClick={() => setLevel(2)}>Nivel 3</button>
+      </div>
       <Selector items={goodThings} onClick={addValue} label={'Cosas buenas'} />
-      <Selector items={badThings} onClick={addValue} label={'Cosas malas'} />
+      <Selector items={lvls[level]} onClick={addValue} label={'Cosas malas'} />
       <TableScore values={values} removeValue={removeValue}/>
     </div>
   );
